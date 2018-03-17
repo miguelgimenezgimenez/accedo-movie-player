@@ -1,0 +1,33 @@
+{
+    "extends": [
+        "airbnb",
+        "standard"
+    ],
+    "rules": {
+        "object-curly-newline": 0,
+        "class-methods-use-this": 0,
+        "lines-between-class-members": 2,
+        "max-len": [
+            2,
+            120
+        ],
+        "no-console": 2,
+        "import/prefer-default-export": false,
+        "react/prefer-stateless-function": false,
+        "react/jsx-filename-extension": false,
+        "react/prop-types": false,
+        "react/no-array-index-key": false,
+        "import/no-unresolved": [
+            2,
+            {
+                "ignore": [
+                    "organisms/",
+                    "atoms/",
+                    "molecules/",
+                    "pages/"
+                ]
+            }
+        ],
+        "import/extensions": false
+    }
+}
