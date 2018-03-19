@@ -3,6 +3,9 @@
         "airbnb",
         "standard"
     ],
+    "globals": {
+        "fetch": true
+    },
     "rules": {
         "object-curly-newline": 0,
         "class-methods-use-this": 0,
@@ -21,13 +24,15 @@
             2,
             {
                 "ignore": [
-                    "organisms/",
-                    "atoms/",
-                    "molecules/",
-                    "pages/"
+                    "/organisms/",
+                    "/atoms/",
+                    "/molecules/",
+                    "/pages/"
                 ]
             }
         ],
-        "import/extensions": false
+        "import/no-absolute-path":false,
+        "import/extensions": false,
+        "no-plusplus":"off"
     }
 }

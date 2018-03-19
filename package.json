@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack-dev-server",
+    "start": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -42,13 +44,20 @@
     "style-loader": "0.19.1",
     "stylelint": "8.4.0",
     "stylelint-config-standard": "18.0.0",
-    "webpack": "3.10.0"
+    "webpack": "3.7.1",
+    "webpack-dev-server": "2.9.2"
   },
   "dependencies": {
+    "lodash.get": "^4.4.2",
+    "lodash.map": "^4.6.0",
+    "material-ui": "^0.20.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",
+    "react-hot-loader": "^4.0.0",
     "react-loaders": "3.0.1",
     "react-redux": "5.0.7",
+    "react-router-dom": "^4.2.2",
+    "react-transition-group": "1.x",
     "redux": "3.7.2",
     "redux-logger": "3.0.6"
   }
