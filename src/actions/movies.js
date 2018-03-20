@@ -6,7 +6,7 @@ export const list = (dispatch) => {
   return apiCall(dispatch, endpoint, 'LIST_FETCHED')
 }
 
-export const loadComponents = (dispatch, start, end) => {
+export const mountComponents = (dispatch, start, end) => {
   let index
   dispatch({ type: 'LOADING' })
   if (end) {

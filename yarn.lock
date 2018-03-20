@@ -5508,6 +5508,10 @@ react-hot-loader@^4.0.0:
     prop-types "^15.6.0"
     shallowequal "^1.0.2"
 
+react-image-preloader@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-image-preloader/-/react-image-preloader-1.0.2.tgz#58dea856c7bf66194311888652234cf142bc922c"
+
 react-loaders@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-loaders/-/react-loaders-3.0.1.tgz#963ad7adefe530b24b1ed13faf4645134cf09a0e"

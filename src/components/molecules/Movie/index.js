@@ -2,27 +2,39 @@ import React, { Component } from 'react'
 import get from 'lodash.get'
 import { connect } from 'react-redux'
 import * as movieActions from '../../../actions/movies'
+import notFoundImage from './image-not-found.jpg'
 
 export default class Movie extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      loaded: false
+      loaded: false,
+      url: get(this.props, 'images[0].url', '')
     }
   }
 
+  setError () {
+    movieActions.loadedMovie(this.props.dispatch)
+    this.setState({ url: notFoundImage })
+  }
+
   changeLoadedStatus () {
-    console.log(this.props)
     movieActions.loadedMovie(this.props.dispatch)
     this.setState({ loaded: true })
   }
 
   render () {
-    const url = get(this.props, 'images[0].url', '')
     return (
       <div >
         {this.props.title}
-        <img src={url} onLoad={() => this.changeLoadedStatus()} heigh="200" width="200" alt={this.props.title} />
+        <img
+          src={this.state.url}
+          onLoad={() => this.changeLoadedStatus()}
+          onError={() => this.setError()}
+          height="200"
+          width="180"
+          alt={this.props.title}
+        />
       </div>
     )
   }

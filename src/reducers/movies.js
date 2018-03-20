@@ -1,28 +1,30 @@
-import Movie from '/molecules/Movie'
-import React from 'react'
 
 const INITIAL_STATE = {
+  error: null,
   list: [],
   loading: false,
-  movieComponents: [],
   loadingImages: 0,
-  loadedImages: 0
+  loadedImages: 0,
+  mountedComponents: []
 }
+const setError = (state, error) => ({ ...state, error, loading: false })
+
 const setLoading = (state, loading) => ({ ...state, loading })
 
 const setLoadedImage = (state) => {
   const loadedImages = state.loadedImages + 1
   return ({ ...state, loadedImages })
 }
-const setMoviesList = (state, list) => ({ ...state, list, movieComponents: new Array(list.length) })
+const setMoviesList = (state, list) => ({ ...state, list, mountedComponents: new Array(list.length) })
 
 const setMovie = (state, index, dispatch) => {
   const loadingImages = state.loadingImages + 1
   const movie = state.list[index]
-  if (state.movieComponents[index]) return ({ ...state, loading: false })
-  const movieComponents = [...state.movieComponents]
-  movieComponents[index] = <Movie key={movie.id} {...movie} dispatch={dispatch} />
-  return ({ ...state, movieComponents, loadingImages, loading: false })
+  if (!movie) return setError(state, `MOVIE NOT IN LIST FOR INDEX ${index}`)
+  if (state.mountedComponents[index]) return ({ ...state, loading: false })
+  const mountedComponents = [...state.mountedComponents]
+  mountedComponents[index] = movie
+  return ({ ...state, mountedComponents, loadingImages, loading: false })
 }
 
 export default (state = INITIAL_STATE, action) => {

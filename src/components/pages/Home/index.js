@@ -5,14 +5,18 @@ import Movie from '/molecules/Movie'
 import * as movieActions from '../../../actions/movies'
 import style from './style.scss'
 
+const getElementsToDisplay = (array, position, carouselLength, total) => {
+  const difference = total - position
+  if (difference < carouselLength) return array.slice(position).concat(array.slice(0, carouselLength - difference))
+  return array.slice(position, position + carouselLength)
+}
+
 class Home extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      start: 0,
-      end: 6
-      // imagesLoaded: false
-
+      position: 0,
+      carouselLength: 5
     }
   }
 
@@ -22,40 +26,67 @@ class Home extends Component {
 
   componentWillReceiveProps (nextProps) {
     // get initial set of movies
-    if (nextProps.moviesList.length !== this.props.moviesList.length) {
-      movieActions.loadComponents(this.props.dispatch, this.state.start, this.state.end)
+    if (nextProps.movies.list.length !== this.props.movies.list.length) {
+      movieActions.mountComponents(this.props.dispatch, 0, this.state.carouselLength)
     }
   }
 
-  end () {
-    movieActions.loadComponents(this.props.dispatch, this.state.end)
-    this.setState({ end: this.state.end + 1 })
+  // componentDidUpdate (prevProps, prevState) {
+  //   // preload other images
+  //   if (this.props.movies.loadedImages && this.props.movies.loadingImages - this.props.movies.loadedImages < 3) {
+  //     const firstEmptyValue = this.props.movies.mountedComponents.findIndex(el => !el)
+  //     if (firstEmptyValue >= 0) movieActions.mountComponents(this.props.dispatch, firstEmptyValue)
+  //   }
+  // }
+
+  moveRight () {
+    const { carouselLength } = this.state
+    let { position } = this.state
+    const { mountedComponents, list } = this.props.movies
+    if (position === list.length - 1) position = 0
+    else position++
+    if (mountedComponents[position + carouselLength - 1]) return this.setState({ position })
+    // mount the component if its not mounted
+    movieActions.mountComponents(this.props.dispatch, position + carouselLength - 1)
+    return this.setState({ position })
   }
 
-  start () {
-    this.setState({ end: this.state.end - 1 })
+  moveLeft () {
+    let { position } = this.state
+    const { mountedComponents, list } = this.props.movies
+    if (position === 0) position = list.length - 1
+    else position--
+
+    if (mountedComponents[position]) return this.setState({ position })
+    // mount the component if its not mounted
+    movieActions.mountComponents(this.props.dispatch, position)
+    return this.setState({ position })
+  }
+
+  movieComponent (movie, index) {
+    return movie && <Movie {...movie} dispatch={this.props.dispatch} key={movie.id} />
   }
 
   render () {
-    const carouselElements = this.props.movieComponents.slice(this.state.start, this.state.end)
+    const { mountedComponents, list } = this.props.movies
+    const { position, carouselLength } = this.state
+
+    // Will only be showing 5 elements in the array, this function will slice the array according to the position
+    const carouselElements = getElementsToDisplay(mountedComponents, position, carouselLength, list.length)
     return (
       <div className={style.carousel}>
-        <button onClick={() => this.end()} >inc</button>
-        <button onClick={() => this.start()} >dec</button>
+        <button onClick={() => this.moveRight()} >inc</button>
+        <button onClick={() => this.moveLeft()} >dec</button>
         <Iterator
           className={style.carousel}
           collection={carouselElements}
-          component={(element, index) => (
-            element && <div key={element.props.id}>{carouselElements[index]}</div>)
-          }
+          component={(movie, index) => this.movieComponent(movie, index)}
         />
       </div>
     )
   }
 }
 const mapStateToProps = state => ({
-  moviesList: state.movies.list,
-  movieComponents: state.movies.movieComponents,
-  loadedImages: state.movies.loadedImages
+  movies: state.movies
 })
 export default connect(mapStateToProps)(Home)
