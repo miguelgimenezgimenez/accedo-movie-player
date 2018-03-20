@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import get from 'lodash.get'
 import { connect } from 'react-redux'
+import { BarLoader } from 'react-css-loaders'
 import * as movieActions from '../../../actions/movies'
 import notFoundImage from './image-not-found.jpg'
+import style from './style.scss'
 
 export default class Movie extends Component {
   constructor (props) {
@@ -25,8 +27,9 @@ export default class Movie extends Component {
 
   render () {
     return (
-      <div >
+      <div className={style[this.props.className]} >
         {this.props.title}
+        {!this.state.loaded && <BarLoader />}
         <img
           src={this.state.url}
           onLoad={() => this.changeLoadedStatus()}

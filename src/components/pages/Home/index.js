@@ -64,7 +64,20 @@ class Home extends Component {
   }
 
   movieComponent (movie, index) {
-    return movie && <Movie {...movie} dispatch={this.props.dispatch} key={movie.id} />
+    let className
+    switch (true) {
+      case index === 2:
+        className = 'center'
+        break
+      case index < 5:
+        className = 'visible'
+        break
+      default:
+        className = 'hidden'
+        break
+    }
+
+    return movie && <Movie {...movie} className={className} dispatch={this.props.dispatch} key={movie.id} />
   }
 
   render () {
