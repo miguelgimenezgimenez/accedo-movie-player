@@ -33,18 +33,19 @@ export default class Movie extends Component {
   render () {
     return (
       <div className={`container ${style[this.props.className]}`} >
-        <div className={style.imgContainer} >
-          {!this.state.loaded && <BubbleSpinLoader color="red" size="11" />}
-          <img
-            style={this.getStyle()}
-            src={this.state.url}
-            onLoad={() => this.changeLoadedStatus()}
-            onError={() => this.setError()}
-            alt={this.props.title}
-          />
+        <div>
+          <div className={style.imgContainer} >
+            {!this.state.loaded && <BubbleSpinLoader color="red" size="11" />}
+            <img
+              style={this.getStyle()}
+              src={this.state.url}
+              onLoad={() => this.changeLoadedStatus()}
+              onError={() => this.setError()}
+              alt={this.props.title}
+            />
+          </div>
+          {this.props.title}
         </div>
-        {this.props.title}
-
       </div>
     )
   }

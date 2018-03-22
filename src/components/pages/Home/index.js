@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
+import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward'
 import Iterator from '/atoms/Iterator'
 import Movie from '/molecules/Movie'
 import * as movieActions from '../../../actions/movies'
@@ -8,6 +9,7 @@ import style from './style.scss'
 
 const getElementsToDisplay = (array, position, carouselLength, total) => {
   const difference = total - position
+  // if position is between end and start of the array concat the last elements with the first elements
   if (difference < carouselLength) return array.slice(position).concat(array.slice(0, carouselLength - difference))
   return array.slice(position, position + carouselLength)
 }
@@ -64,23 +66,6 @@ class Home extends Component {
     return this.setState({ position })
   }
 
-  movieComponent (movie, index) {
-    let className
-    switch (true) {
-      case index === 0:
-        className = 'center'
-        break
-      case index < 5:
-        className = 'visible'
-        break
-      default:
-        className = 'hidden'
-        break
-    }
-
-    return movie && <Movie {...movie} className={className} dispatch={this.props.dispatch} key={movie.id} />
-  }
-
   render () {
     const { mountedComponents, list } = this.props.movies
     const { position, carouselLength } = this.state
@@ -90,16 +75,24 @@ class Home extends Component {
 
     return (
       <div className={style.container} >
-        <ArrowBack style={{ color: 'gray' }} />
+        <ArrowBack
+          onClick={() => this.moveRight()}
+          style={{ color: 'black', height: 40, width: 40, margin: 'auto' }
+          }
+        />
         <div className={style.carousel}>
           <Iterator
             className={style.carousel}
             collection={carouselElements}
-            component={(movie, index) => this.movieComponent(movie, index)}
+            component={(movie, index) =>
+              movie && <Movie {...movie} index={index} dispatch={this.props.dispatch} key={movie.id} />}
           />
         </div>
-        <button onClick={() => this.moveLeft()} >dec</button>
-        <button onClick={() => this.handleAdd()}>Add Item</button>
+        <ArrowForward
+          onClick={() => this.moveRight()}
+          style={{ color: 'black', height: 40, width: 40, margin: 'auto' }
+          }
+        />
 
       </div>
     )

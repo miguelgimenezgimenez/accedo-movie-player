@@ -1,36 +1,11 @@
-/* The animation code */
-
-@keyframes focus {
-    from {
-       transform: translateX(-500px)
-    }
-    to {
-        // transform: translateX(0)
-    }
-}
 
 .visible {
     text-align: center;
-    margin-top: 300px;
     width: 220px;
     height: 180px;
+      margin-left: 60px;
     img {
         width: 208px;
         height: 210px;
-    }
-}
-
-.center {
-    position: absolute; 
-    left: 200px;
-    text-align: center;
-    width: 320px;
-    height: 280px;
-    margin-top: 0;
-    animation-name: focus;
-    animation-duration: 3s;
-    img {
-        width: 308px;
-        height: 310px;
     }
 }
