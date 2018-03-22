@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import get from 'lodash.get'
 import { connect } from 'react-redux'
-import { BarLoader } from 'react-css-loaders'
+import { BubbleSpinLoader } from 'react-css-loaders'
 import * as movieActions from '../../../actions/movies'
 import notFoundImage from './image-not-found.jpg'
 import style from './style.scss'
@@ -20,6 +20,11 @@ export default class Movie extends Component {
     this.setState({ url: notFoundImage })
   }
 
+  getStyle () {
+    if (!this.state.loaded) return { display: 'none' }
+    return {}
+  }
+
   changeLoadedStatus () {
     movieActions.loadedMovie(this.props.dispatch)
     this.setState({ loaded: true })
@@ -27,17 +32,19 @@ export default class Movie extends Component {
 
   render () {
     return (
-      <div className={style[this.props.className]} >
+      <div className={`container ${style[this.props.className]}`} >
+        <div className={style.imgContainer} >
+          {!this.state.loaded && <BubbleSpinLoader color="red" size="11" />}
+          <img
+            style={this.getStyle()}
+            src={this.state.url}
+            onLoad={() => this.changeLoadedStatus()}
+            onError={() => this.setError()}
+            alt={this.props.title}
+          />
+        </div>
         {this.props.title}
-        {!this.state.loaded && <BarLoader />}
-        <img
-          src={this.state.url}
-          onLoad={() => this.changeLoadedStatus()}
-          onError={() => this.setError()}
-          height="200"
-          width="180"
-          alt={this.props.title}
-        />
+
       </div>
     )
   }

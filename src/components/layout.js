@@ -6,7 +6,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
 import colors from '../colors'
-// import style from './layout.scss'
+import './layout.scss'
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -15,7 +15,8 @@ const muiTheme = getMuiTheme({
     textColor: colors.white
   },
   appBar: {
-    height: 50
+    height: 100,
+    opacity: 0.5
   }
 })
 

@@ -1,18 +1,36 @@
 /* The animation code */
 
-@keyframes example {
+@keyframes focus {
     from {
-        margin-top: 30px;
+       transform: translateX(-500px)
     }
     to {
-        margin-top: 300px;
+        // transform: translateX(0)
     }
 }
 
-/* The element to apply the animation to */
+.visible {
+    text-align: center;
+    margin-top: 300px;
+    width: 220px;
+    height: 180px;
+    img {
+        width: 208px;
+        height: 210px;
+    }
+}
 
 .center {
-    margin-top: 300px; // background-color: red;
-    animation-name: example;
-    animation-duration: 4s;
+    position: absolute; 
+    left: 200px;
+    text-align: center;
+    width: 320px;
+    height: 280px;
+    margin-top: 0;
+    animation-name: focus;
+    animation-duration: 3s;
+    img {
+        width: 308px;
+        height: 310px;
+    }
 }

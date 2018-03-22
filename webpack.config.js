@@ -13,7 +13,7 @@ module.exports = {
   context: `${__dirname}/src`,
   entry: './index.js',
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
     publicPath: ''
   },
@@ -39,11 +39,18 @@ module.exports = {
         loader: 'file-loader?publicPath=/'
       },
       {
-        test: /\.s?css$/,
+        test: /\.scss$/,
         loaders: [
           'style-loader',
           'css-loader?modules&sourceMap&localIdentName=[name]_[local]_[hash:base64:5]',
           'sass-loader?sourceMap'
+        ]
+      },
+      {
+        test: /\.css$/,
+        loaders: [
+          'style-loader',
+          'css-loader'
         ]
       },
       {

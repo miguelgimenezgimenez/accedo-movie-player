@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import Iterator from '/atoms/Iterator'
 import Movie from '/molecules/Movie'
 import * as movieActions from '../../../actions/movies'
@@ -66,7 +67,7 @@ class Home extends Component {
   movieComponent (movie, index) {
     let className
     switch (true) {
-      case index === 2:
+      case index === 0:
         className = 'center'
         break
       case index < 5:
@@ -86,15 +87,20 @@ class Home extends Component {
 
     // Will only be showing 5 elements in the array, this function will slice the array according to the position
     const carouselElements = getElementsToDisplay(mountedComponents, position, carouselLength, list.length)
+
     return (
-      <div className={style.carousel}>
-        <button onClick={() => this.moveRight()} >inc</button>
+      <div className={style.container} >
+        <ArrowBack style={{ color: 'gray' }} />
+        <div className={style.carousel}>
+          <Iterator
+            className={style.carousel}
+            collection={carouselElements}
+            component={(movie, index) => this.movieComponent(movie, index)}
+          />
+        </div>
         <button onClick={() => this.moveLeft()} >dec</button>
-        <Iterator
-          className={style.carousel}
-          collection={carouselElements}
-          component={(movie, index) => this.movieComponent(movie, index)}
-        />
+        <button onClick={() => this.handleAdd()}>Add Item</button>
+
       </div>
     )
   }

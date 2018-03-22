@@ -4,7 +4,7 @@ import map from 'lodash.map'
 
 const Iterator = (props) => {
   const list = map(props.collection, (element, index) => props.component(element, index))
-  return list || null
+  return list
 }
 
 export default Iterator

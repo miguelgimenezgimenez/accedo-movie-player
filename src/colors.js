@@ -1,5 +1,5 @@
 module.exports = {
-  primary: '#FC3D67',
+  primary: 'rgba(0,0,0,0.5)',
   primaryDisabled: '#FD9EB3',
   primaryHover: '#FC6D8D',
   primaryPressed: '#A42743',
