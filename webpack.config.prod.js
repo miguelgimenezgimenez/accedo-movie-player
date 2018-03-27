@@ -1,19 +1,14 @@
 const webpack = require('webpack')
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
-const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './index.html',
-  filename: 'index.html',
-  inject: 'body'
-})
 module.exports = {
   context: `${__dirname}/client`,
   entry: './index.js',
   output: {
     path: path.join(__dirname, 'public'),
-    filename: 'bundle.js',
-    publicPath: ''
+    filename: 'bundle.js'
+
   },
   resolve: {
     extensions: ['.js', '.json']
@@ -61,7 +56,6 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: `"${process.env.NODE_ENV || 'production'}"` }
     }),
-    HtmlWebpackPluginConfig
-
+    new UglifyJSPlugin()
   ]
 }

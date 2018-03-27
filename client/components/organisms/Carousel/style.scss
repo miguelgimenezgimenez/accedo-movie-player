@@ -38,12 +38,23 @@
 
 @media (max-width: 1008px) {
     .arrow {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
     }
     .carousel {
         margin: 15px;
         width: 480px;
+    }
+
+}
+@media (max-width: 720px) {
+    .arrow {
+        width: 30px;
+        height: 30px;
+    }
+    .carousel {
+        margin: 0;
+        width: 280px;
     }
 
 }

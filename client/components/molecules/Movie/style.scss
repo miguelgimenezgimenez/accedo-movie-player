@@ -1,6 +1,6 @@
 .visible {
     text-align: center;
-    width: 200px;
+    width: 150px;
     
     img {
         width: 150px;
@@ -43,7 +43,7 @@
     width: 45px;
     height: 40px;
     margin-top: 90px;
-    margin-left: 80px;
+    margin-left: 60px;
     background-size: contain;
     background-image: url('./play.png');
     background-repeat: no-repeat;
@@ -61,7 +61,25 @@
         width: 100px;
         img {
             width: 75px;
-            height: 95px;
+            height: 120px;
+        }
+    }
+
+}
+@media (max-width: 720px) {
+    .play {
+        width: 15px;
+        height: 15px;
+        margin-top: 25px;
+        margin-left: 27px;
+    }
+   
+    .visible {
+        text-align: center;
+        width: 75px;
+        img {
+            width: 50px;
+            height: 100px;
         }
     }
 

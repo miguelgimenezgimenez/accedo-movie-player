@@ -25,6 +25,9 @@
         "no-plusplus":"off",
         "jsx-a11y/media-has-caption":false,
         "jsx-a11y/click-events-have-key-events":false,
-        "jsx-a11y/no-static-element-interactions":false
+        "jsx-a11y/no-static-element-interactions":false,
+        "jsx-a11y/tabindex-no-positive":false,
+        "jsx-a11y/no-noninteractive-tabindex":false,
+        "react/sort-comp":false        
     }
 }

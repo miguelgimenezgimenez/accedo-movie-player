@@ -7,7 +7,6 @@ import * as movieActions from '../../../actions/movies'
 
 import notFoundImage from './image-not-found.jpg'
 import style from './style.scss'
-import play from './play.png'
 
 export default class Movie extends Component {
   constructor (props) {
@@ -15,28 +14,9 @@ export default class Movie extends Component {
     this.state = {
       loaded: false,
       url: get(this.props, 'images[0].url', ''),
-      open: false,
-      error: false
+      open: false
 
     }
-  }
-
-  onOpenModal () {
-    this.setState({ open: true })
-  }
-
-  onCloseModal () {
-    this.setState({ open: false })
-  }
-
-  setError () {
-    movieActions.loadedMovie(this.props.dispatch)
-    this.setState({ url: notFoundImage, error: true })
-  }
-
-  getStyle () {
-    if (!this.state.loaded) return { display: 'none' }
-    return {}
   }
 
   changeLoadedStatus () {
@@ -44,19 +24,47 @@ export default class Movie extends Component {
     this.setState({ loaded: true })
   }
 
+  getStyle () {
+    if (!this.state.loaded) return { display: 'none' }
+    return {}
+  }
+
+  onCloseModal () {
+    this.setState({ open: false })
+  }
+
+  playVideo () {
+    const history = JSON.parse(window.localStorage.getItem('history')) || []
+
+    const { contents, images, title, id } = this.props
+
+    const dataToStore = { contents, images, title, id }
+
+    if (!history.find(movie => movie.title === title)) {
+      history.push(dataToStore)
+    }
+
+    window.localStorage.setItem('history', JSON.stringify(history))
+    this.setState({ open: true })
+  }
+
+  setError () {
+    movieActions.loadedMovie(this.props.dispatch)
+    this.setState({ url: notFoundImage })
+  }
+
   render () {
     const { open } = this.state
-
     return (
-      <div className={style[this.props.className]} onClick={() => this.onOpenModal()} >
+      <div className={style[this.props.className]} onClick={() => this.playVideo()} >
 
         <div >
           {this.state.loaded
-            ? !this.state.error && <div className={style.play} />
-            : <BubbleSpinLoader color="red" size="11" />}
+            ? <div className={style.play} />
+            : <BubbleSpinLoader color="red" size="5" />}
 
           <Modal className={style.modal} open={open} onClose={() => this.onCloseModal()} >
-            <video className={style.backgroundvid} controls>
+            <video className={style.backgroundvid} controls onEnded={() => this.onCloseModal()}>
               <source type="video/mp4" src={this.props.contents[0].url} />
             </video>
           </Modal>
