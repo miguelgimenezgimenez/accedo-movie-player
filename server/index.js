@@ -8,7 +8,7 @@ const config = require('../config')
 
 const app = express()
 
-app.use(cors({ origin: config.apiUrl }))
+app.use(cors({ origin: config.frontUrl }))
 app.engine('html', cons.swig)
 // view engine setup
 app.set('view engine', 'html')
