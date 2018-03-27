@@ -4,6 +4,14 @@
 Deployed project at http://miguelgimenez.tech
 ### Running the project
 
+**Install dependencies:**
+
+
+    $ yarn 
+    or 
+    $ npm install
+
+
 **Run in development mode:**
 
 
