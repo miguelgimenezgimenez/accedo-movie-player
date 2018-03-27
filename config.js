@@ -8,7 +8,7 @@ const getConfig = () => {
       }
     case 'production':
       return {
-        apiUrl: 'https://46.101.91.79'
+        apiUrl: 'http://46.101.91.79'
 
       }
     default:
