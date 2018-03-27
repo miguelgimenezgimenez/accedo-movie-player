@@ -34,7 +34,7 @@ scope for the carousel.
 
 ## Architecture:
 
-To Structure the project I have grouped the components as Atoms, Molecules, Organisms and Pages:
+To Structure the project I have grouped the components as Atoms, Molecules and Pages:
 
 ### Atoms
 
