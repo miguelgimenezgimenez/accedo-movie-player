@@ -3,7 +3,10 @@ const getConfig = () => {
   switch (process.env.NODE_ENV) {
     case 'development':
       return {
-        apiUrl: 'http://localhost:3000'
+        apiUrl: 'http://localhost:3000',
+        mongodb: {
+          url: 'mongodb://localhost/accedo'
+        }
 
       }
     case 'production':

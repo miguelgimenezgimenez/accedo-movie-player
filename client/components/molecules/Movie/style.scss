@@ -1,18 +1,22 @@
-
 .visible {
     text-align: center;
     width: 200px;
+    
     img {
+        width: 150px;
         height: 210px;
     }
 }
+
+.visible:hover {
+    cursor: pointer;
+}
+
 .hidden {
     display: none;
 }
-.hidden {
-    display: none;
-}
-video#backgroundvid {
+
+.backgroundvid {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -20,7 +24,45 @@ video#backgroundvid {
     min-height: 100%;
     width: auto;
     height: auto;
-    z-index: -100;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     background-size: cover;
+}
+
+.modal {
+    width: 100%;
+    height: 100%;
+}
+
+.playContainer {
+    height: 100%;
+    width: 100%;
+}
+
+.play {
+    position: absolute;
+    width: 45px;
+    height: 40px;
+    margin-top: 90px;
+    margin-left: 80px;
+    background-size: contain;
+    background-image: url('./play.png');
+    background-repeat: no-repeat;
+}
+@media (max-width: 1008px) {
+    .play {
+        width: 25px;
+        height: 20px;
+        margin-top: 45px;
+        margin-left: 40px;
+    }
+   
+    .visible {
+        text-align: center;
+        width: 100px;
+        img {
+            width: 75px;
+            height: 95px;
+        }
+    }
+
 }

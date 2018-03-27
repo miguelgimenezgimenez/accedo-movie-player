@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
-import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward'
+import ArrowKeysReact from 'arrow-keys-react'
 import Iterator from '../../atoms/Iterator'
+
 import Movie from '../../molecules/Movie'
 import * as movieActions from '../../../actions/movies'
 import style from './style.scss'
@@ -14,9 +14,18 @@ class Home extends Component {
       position: 0,
       carouselLength: 5
     }
+    ArrowKeysReact.config({
+      left: () => {
+        this.moveLeft()
+      },
+      right: () => {
+        this.moveRight()
+      }
+    })
   }
 
   componentDidMount () {
+    this.listener.focus()
     movieActions.list(this.props.dispatch)
   }
 
@@ -52,7 +61,6 @@ class Home extends Component {
     const { mountedComponents, list } = this.props.movies
     if (position === 0) position = list.length - 1
     else position--
-
     if (mountedComponents[position]) return this.setState({ position })
     // mount the component if its not mounted
     movieActions.mountComponents(this.props.dispatch, position)
@@ -64,25 +72,22 @@ class Home extends Component {
     const { position, carouselLength } = this.state
     const { list } = this.props.movies
 
-    // if carousel is between end and begining of array
     const concatenatedListLength = position + carouselLength
+    // if carousel is between end and begining of array
     if (concatenatedListLength > list.length) {
+      if (index >= position && list.length - position < carouselLength) return 'visible'
       return concatenatedListLength - list.length > index ? 'visible' : 'hidden'
     }
-    return index > position && index - position < carouselLength ? 'visible' : 'hidden'
+    return index >= position && index - position < carouselLength ? 'visible' : 'hidden'
   }
 
   render () {
     const { mountedComponents } = this.props.movies
-    // const firstEmptyValue = mountedComponents.findIndex(el => !el)
 
     return (
-      <div className={style.container} >
-        <ArrowBack
-          onClick={() => this.moveLeft()}
-          style={{ color: 'black', height: 40, width: 40, margin: 'auto' }
-          }
-        />
+      <div ref={(listener) => { this.listener = listener }} {...ArrowKeysReact.events} tabIndex="1" className={style.container} >
+        <div className={`${style.arrow} ${style.left}`} onClick={() => this.moveLeft()} />
+
         <div className={style.carousel}>
           <Iterator
             collection={mountedComponents}
@@ -96,11 +101,8 @@ class Home extends Component {
               />}
           />
         </div>
-        <ArrowForward
-          onClick={() => this.moveRight()}
-          style={{ color: 'black', height: 40, width: 40, margin: 'auto' }
-          }
-        />
+
+        <div className={`${style.arrow} ${style.right}`} onClick={() => this.moveRight()} />
 
       </div>
     )

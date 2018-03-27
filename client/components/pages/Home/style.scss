@@ -1,12 +1,49 @@
+.arrow {
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.arrow:hover {
+    cursor: pointer;
+}
+
+.left {
+    margin-left: 40px;
+    background-image: url('./chevron_left.png');
+}
+
+.right {
+    margin-right: 40px;
+    background-image: url('./chevron_right.png');
+}
+
 .carousel {
     display: flex;
     justify-content: space-around;
     flex: 1;
     margin: 30px;
+    width: 600px;
 }
 
 .container {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
+.container:focus{
+   outline: none;
+}
 
+@media (max-width: 1008px) {
+    .arrow {
+        width: 30px;
+        height: 30px;
+    }
+    .carousel {
+        margin: 15px;
+        width: 480px;
+    }
+
+}
