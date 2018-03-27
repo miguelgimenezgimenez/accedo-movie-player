@@ -11,7 +11,8 @@ export default class Movie extends Component {
     super(props)
     this.state = {
       loaded: false,
-      url: get(this.props, 'images[0].url', '')
+      url: get(this.props, 'images[0].url', ''),
+      play: false
     }
   }
 
@@ -32,20 +33,22 @@ export default class Movie extends Component {
 
   render () {
     return (
-      <div className={`container ${style[this.props.className]}`} >
-        <div>
-          <div className={style.imgContainer} >
-            {!this.state.loaded && <BubbleSpinLoader color="red" size="11" />}
-            <img
-              style={this.getStyle()}
-              src={this.state.url}
-              onLoad={() => this.changeLoadedStatus()}
-              onError={() => this.setError()}
-              alt={this.props.title}
-            />
-          </div>
-          {this.props.title}
+      <div className={style[this.props.className]} >
+        <div className={style.imgContainer} >
+          {!this.state.loaded && <BubbleSpinLoader color="red" size="11" />}
+          {this.state.play &&
+          <video className={style.backgroundvid}>
+            <source src={this.props.contents[0].url} />
+          </video>}
+          <img
+            style={this.getStyle()}
+            src={this.state.url}
+            onLoad={() => this.changeLoadedStatus()}
+            onError={() => this.setError()}
+            alt={this.props.title}
+          />
         </div>
+        {this.props.title}
       </div>
     )
   }

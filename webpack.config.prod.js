@@ -2,8 +2,6 @@ const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const { resolve } = path
-
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './index.html',
   filename: 'index.html',
@@ -18,13 +16,7 @@ module.exports = {
     publicPath: ''
   },
   resolve: {
-    extensions: ['.js', '.json'],
-    alias: {
-      '/atoms': resolve(__dirname, 'client', 'components', 'atoms'),
-      '/molecules': resolve(__dirname, 'client', 'components', 'molecules'),
-      '/organisms': resolve(__dirname, 'client', 'components', 'organisms'),
-      pages: resolve(__dirname, 'client', 'components', 'pages')
-    }
+    extensions: ['.js', '.json']
   },
   stats: {
     colors: true,
@@ -67,7 +59,7 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: `"${process.env.NODE_ENV || 'development'}"` }
+      'process.env': { NODE_ENV: `"${process.env.NODE_ENV || 'production'}"` }
     }),
     HtmlWebpackPluginConfig
 

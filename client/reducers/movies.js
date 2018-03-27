@@ -32,7 +32,7 @@ export default (state = INITIAL_STATE, action) => {
     case 'LOADING':
       return setLoading(state, true)
     case 'LIST_FETCHED':
-      return setMoviesList(state, action.data.entries)
+      return setMoviesList(state, action.data.body.entries)
     case 'LOADED_IMAGE':
       return setLoadedImage(state, action.index, action.dispatch)
     case 'SET_MOVIE':

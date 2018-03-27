@@ -2,15 +2,11 @@
     display: flex;
     justify-content: space-around;
     flex: 1;
+    margin: 30px;
 }
 
 .container {
     display: flex;
-    // height: 800px;
     justify-content: space-between;
 }
 
-
-.preloaded {
-    display: none;
-}

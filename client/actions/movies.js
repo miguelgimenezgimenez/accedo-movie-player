@@ -1,9 +1,8 @@
-import { apiCall } from '../utils/api'
+import { frontApiCall } from '../utils/frontApi'
 
 export const list = (dispatch) => {
   dispatch({ type: 'LOADING' })
-  const endpoint = ''
-  return apiCall(dispatch, endpoint, 'LIST_FETCHED')
+  return frontApiCall(dispatch, 'movies', 'LIST_FETCHED')
 }
 
 export const mountComponents = (dispatch, start, end) => {

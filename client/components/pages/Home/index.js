@@ -2,17 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward'
-import Iterator from '/atoms/Iterator'
-import Movie from '/molecules/Movie'
+import Iterator from '../../atoms/Iterator'
+import Movie from '../../molecules/Movie'
 import * as movieActions from '../../../actions/movies'
 import style from './style.scss'
-
-const getElementsToDisplay = (array, position, carouselLength, total) => {
-  const difference = total - position
-  // if position is between end and start of the array concat the last elements with the first elements
-  if (difference < carouselLength) return array.slice(position).concat(array.slice(0, carouselLength - difference))
-  return array.slice(position, position + carouselLength)
-}
 
 class Home extends Component {
   constructor (props) {
@@ -34,13 +27,13 @@ class Home extends Component {
     }
   }
 
-  // componentDidUpdate (prevProps, prevState) {
-  //   // preload other images
-  //   if (this.props.movies.loadedImages && this.props.movies.loadingImages - this.props.movies.loadedImages < 3) {
-  //     const firstEmptyValue = this.props.movies.mountedComponents.findIndex(el => !el)
-  //     if (firstEmptyValue >= 0) movieActions.mountComponents(this.props.dispatch, firstEmptyValue)
-  //   }
-  // }
+  componentDidUpdate (prevProps, prevState) {
+    // preload other images
+    if (this.props.movies.loadedImages && this.props.movies.loadingImages - this.props.movies.loadedImages < 3) {
+      const firstEmptyValue = this.props.movies.mountedComponents.findIndex(el => !el)
+      if (firstEmptyValue >= 0) movieActions.mountComponents(this.props.dispatch, firstEmptyValue)
+    }
+  }
 
   moveRight () {
     const { carouselLength } = this.state
@@ -66,26 +59,41 @@ class Home extends Component {
     return this.setState({ position })
   }
 
-  render () {
-    const { mountedComponents, list } = this.props.movies
+  defineVisibleClass (index) {
+    // Will only be showing the carousel length number of elements in the array
     const { position, carouselLength } = this.state
+    const { list } = this.props.movies
 
-    // Will only be showing 5 elements in the array, this function will slice the array according to the position
-    const carouselElements = getElementsToDisplay(mountedComponents, position, carouselLength, list.length)
+    // if carousel is between end and begining of array
+    const concatenatedListLength = position + carouselLength
+    if (concatenatedListLength > list.length) {
+      return concatenatedListLength - list.length > index ? 'visible' : 'hidden'
+    }
+    return index > position && index - position < carouselLength ? 'visible' : 'hidden'
+  }
+
+  render () {
+    const { mountedComponents } = this.props.movies
+    // const firstEmptyValue = mountedComponents.findIndex(el => !el)
 
     return (
       <div className={style.container} >
         <ArrowBack
-          onClick={() => this.moveRight()}
+          onClick={() => this.moveLeft()}
           style={{ color: 'black', height: 40, width: 40, margin: 'auto' }
           }
         />
         <div className={style.carousel}>
           <Iterator
-            className={style.carousel}
-            collection={carouselElements}
+            collection={mountedComponents}
             component={(movie, index) =>
-              movie && <Movie {...movie} index={index} dispatch={this.props.dispatch} key={movie.id} />}
+              movie &&
+              <Movie
+                {...movie}
+                className={this.defineVisibleClass(index)}
+                dispatch={this.props.dispatch}
+                key={movie.id}
+              />}
           />
         </div>
         <ArrowForward
