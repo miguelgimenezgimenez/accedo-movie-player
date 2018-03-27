@@ -4,11 +4,10 @@ const routes = require('./routes')
 const path = require('path')
 const errorMiddleware = require('./middlewares/error')
 const cors = require('cors')
-const config = require('../config')
 
 const app = express()
 
-app.use(cors({ origin: config.frontUrl }))
+app.use(cors())
 app.engine('html', cons.swig)
 // view engine setup
 app.set('view engine', 'html')
