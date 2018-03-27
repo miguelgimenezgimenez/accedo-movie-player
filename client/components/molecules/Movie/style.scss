@@ -54,12 +54,15 @@
         height: 20px;
         margin-top: 45px;
         margin-left: 40px;
+        margin-top: 125px;
+
     }
    
     .visible {
         text-align: center;
         width: 100px;
         img {
+            margin-top: 100px;
             width: 75px;
             height: 120px;
         }
@@ -70,7 +73,7 @@
     .play {
         width: 15px;
         height: 15px;
-        margin-top: 25px;
+        margin-top: 125px;
         margin-left: 27px;
     }
    
@@ -78,6 +81,7 @@
         text-align: center;
         width: 75px;
         img {
+            margin-top: 100px;
             width: 50px;
             height: 100px;
         }
