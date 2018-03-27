@@ -2,6 +2,7 @@ const express = require('express')
 const cons = require('consolidate')
 const routes = require('./routes')
 const path = require('path')
+const errorMiddleware = require('./middlewares/error')
 
 const app = express()
 
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api', routes)
 app.use('/', (req, res) => res.render('index.html'))
+app.use(errorMiddleware)
 
 app.listen(3000, () => {
   // eslint-disable-next-line
