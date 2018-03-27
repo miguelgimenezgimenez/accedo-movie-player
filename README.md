@@ -22,7 +22,6 @@ Then go to ``http://localhost:3000/``
 
 # DESCRIPTION
 
-## Libraries/Frameworks:
 
 The project has been done with React, Redux,React Router, Babel, Webpack, and Express.
 It is deployed using an nginx server on Digital Ocean. I didnt have time to set up https, but wanted to do it.
@@ -30,6 +29,7 @@ Since the response for the images at ```lorempixel``` was a bit slow and the res
 so after loading a first set of images , I would request more images as the user scrolls, or when the previous images had been loaded.
 Also I decided to cache ther images manually by mounting all the images components, but not displaying the elements which were out of 
 scope for the carousel.
+I would have liked to add login and database connections but I havent had time.
 
 
 ## Architecture:
