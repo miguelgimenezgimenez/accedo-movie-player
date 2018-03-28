@@ -37,7 +37,7 @@ Since the response for the images at ```lorempixel``` was a bit slow and the res
 so after loading a first set of images , I would request more images as the user scrolls, or when the previous images had been loaded.
 Also I decided to cache ther images manually by mounting all the images components, but not displaying the elements which were out of 
 scope for the carousel. I could have usedd flexbox to create a much simpler carousel, but from the specifications I understood that this was the way it was supposed to be created.
-Also the UI is not very beautiful, but I have had no time to make it better.
+Also the UI is not very beautiful,if I am given more time I would like to include  tests, login and improve UI .
 
 
 ## Architecture:
@@ -90,14 +90,21 @@ policy that blocks you to access that file more than 5 times per hour that
 file. Please describe how would you bypass that limitation given that your
 application will be used by thousand of users.**
 
+
 I would have stored the data in a database and would make a call every 15 minutes to the endopoint to update my database.
 
-**4. Once the feature is complete, how would you know that it’s ready for
-go-live? **
+
+
+**4.Once the feature is complete, how would you know that it’s ready for go-live?**
+
 
 Once all the tests  ( stress tests , TDD , integration ... ) and the security has been properly setup (Https, secured routes ...) should be ready to go live.
 
+
+
 **5. How would you determine if this feature is successful?**
+
+
 
 By determining how many users are getting back to their history to view which videos they have watched.
 
