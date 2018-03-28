@@ -90,14 +90,21 @@ policy that blocks you to access that file more than 5 times per hour that
 file. Please describe how would you bypass that limitation given that your
 application will be used by thousand of users.**
 
+
 I would have stored the data in a database and would make a call every 15 minutes to the endopoint to update my database.
 
-**4. Once the feature is complete, how would you know that it’s ready for
-go-live? **
+
+
+**4.Once the feature is complete, how would you know that it’s ready for go-live?**
+
 
 Once all the tests  ( stress tests , TDD , integration ... ) and the security has been properly setup (Https, secured routes ...) should be ready to go live.
 
+
+
 **5. How would you determine if this feature is successful?**
+
+
 
 By determining how many users are getting back to their history to view which videos they have watched.
 
